@@ -7,18 +7,18 @@ class rvm::dependencies::centos {
 
   case $version {
     /^6\..*/: {
-      ensure_packages(['libcurl-devel'])
+      realize( Package['libcurl-devel'] )
     }
     /^5\..*/: {
-      ensure_packages(['autoconf'])
-      ensure_packages(['curl-devel'])
+      realize( Package['curl-devel'] )
+      realize( Package['autoconf'] )
     }
     default: {
-      ensure_packages(['curl-devel'])
+      realize( Package['curl-devel'] )
     }
   }
 
-  ensure_packages(['which','gcc','gcc-c++','make','gettext-devel','expat-devel','zlib-devel','openssl-devel',
-    'perl','cpio','gettext-devel','wget','bzip2','libxml2','libxml2-devel','libxslt','libxslt-devel',
-    'readline-devel','patch','git','libyaml-devel','libffi-devel','libtool','bison'])
+  $deps = ['which','gcc','gcc-c++','make','gettext-devel','expat-devel','zlib-devel','openssl-devel','perl','cpio','gettext-devel','wget','bzip2','libxml2','libxml2-devel','libxslt','libxslt-devel','readline-devel','patch','git','libyaml-devel','libffi-devel','libtool','bison']
+
+  realize( Package[$deps] )
 }
